@@ -84,7 +84,7 @@ def get_mon_addresses()
       if node['ceph']['config']['global'] && node['ceph']['config']['global']['public network']
         mon_ips = mons.map { |nodeish| find_node_ip_in_network(node['ceph']['config']['global']['public network'], nodeish) }
       else
-        mon_ips = mons.map { |node| node['ipaddress'] + ":6789" }
+        mon_ips = mons.map { |node| node['ipaddress'] + ":6789" if !node['ipaddress'].nil? }
       end
     end
   end
